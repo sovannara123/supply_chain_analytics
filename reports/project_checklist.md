@@ -135,7 +135,8 @@ supply-chain-analytics/
 │   ├── inventory_analysis_summary.md   ✅
 │   ├── predictive_model_summary.md     ✅
 │   ├── Executive_Summary.pdf           ✅
-│   └── Presentation.pdf                ✅
+│   ├── Presentation.pdf                ✅
+│   └── technical_review.md             ✅ AI Hiring Manager Review
 ├── README.md                           ✅
 ├── requirements.txt                    ✅
 └── LICENSE                             ✅
