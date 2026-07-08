@@ -149,7 +149,7 @@ supply-chain-analytics/
 ├── README.md                          ← You are here
 ├── reports/
 │   ├── project_overview.md            ← This document
-│   └── github_audit_prompt.md         ← Pre-publish audit checklist
+
 ├── notebooks/
 │   ├── 01_cleaning_and_exploration    ← Data cleaning + initial discovery
 │   └── 02_root_cause_analysis         ← Root causes + recommendation
