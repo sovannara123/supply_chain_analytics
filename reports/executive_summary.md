@@ -17,12 +17,22 @@ You have two investment requests on your desk totaling more than budget allows. 
 
 **The bottleneck is on the road, not in the warehouse.**
 
-| Evidence | What it tells us |
-|----------|-----------------|
-| Standard Class is 60% late; Second Class is 47% late — same warehouse, same products | The warehouse isn't the problem. It doesn't know which delivery class an order uses. |
-| 20% of origin cities cause 71% of late orders | The problem is concentrated in specific routes and carriers, not across all operations. |
-| Late rate is flat year-round — 55% every month for 4 years | Not a rainy season or capacity issue. The problem is structural, not seasonal. |
-| Late vs on-time profit differs by only $0.41 per order | The direct cost isn't in margin — it's in customer churn, which this data can't measure. |
+**1. The warehouse isn't the problem.**
+All delivery modes originate from the same warehouse, but Standard and First Class are driving the delays. The difference happens on the road.
+
+![Shipping Modes Late Rate](../visuals/shipping_modes.png)
+
+**2. The problem is concentrated in specific routes.**
+A Pareto analysis shows that delays are heavily concentrated. Addressing the routes leaving these 10 origin cities will have a massive cascading effect.
+
+![Top 10 Worst Origin Cities](../visuals/worst_cities.png)
+
+**3. The problem is structural, not seasonal.**
+This is not a rainy season anomaly. The late rate has been stuck at ~55% every month for 4 years.
+
+![Seasonal Trend](../visuals/seasonal_trend.png)
+
+*(Note: While the direct profit difference between a late vs. on-time order is only $0.41, the true cost lies in customer churn which this data cannot quantify).*
 
 ## The recommendation
 
@@ -43,11 +53,7 @@ Warehouse racking and a better inventory system would improve picking efficiency
 
 ### Estimated impact
 
-| Scenario | Late orders eliminated | Profit protected |
-|----------|----------------------|-----------------|
-| Fix worst 20% of origins to company average | ~50,000 | ~$1.7M |
-| Fix Standard Class to Second Class levels | ~14,000 | ~$462K |
-| 1 truck pilot on Phnom Penh–Siem Reap | TBD — needs before/after measurement | TBD |
+![ROI Projection](../visuals/roi_projection.png)
 
 ## Data limitations
 
