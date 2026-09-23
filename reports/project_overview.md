@@ -64,7 +64,7 @@ Root Cause Analysis ─── Pareto analysis (20% origins → 71% late),
     │                     Standard vs Second Class comparison,
     │                     seasonality check, what-if simulation
     ▼
-Recommendation ──────── Buy trucks, don't upgrade warehouse
+Recommendation ──────── Enforce SLAs, do not spend CapEx
 ```
 
 ---
@@ -106,22 +106,22 @@ We attempted to build a predictive model using order-level features (product, cu
 
 ---
 
-## Recommendation: Buy the trucks, don't upgrade the warehouse
+## Strategic Recommendation: Enforce SLAs, avoid CapEx
 
-**The bottleneck is on the road, not inside the building.**
+**The bottleneck is a vendor performance issue on the road, not inside the building.**
 
 | Evidence | What it tells us |
 |----------|-----------------|
-| Standard Class (60% late) vs Second Class (47% late) | Same warehouse, different late rate = not a warehouse problem |
-| 20% of origins → 71% of late orders | Route-specific, not facility-wide |
-| Flat year-round, no wet season spike | Not a capacity or weather problem |
+| Standard Class (60% late) vs Second Class (47% late) | Same warehouse, different late rate = not a warehouse capacity problem |
+| 20% of origins → 71% of late orders | Route-specific 3PL concentration risk, not facility-wide |
+| Flat year-round, no wet season spike | Not a weather problem, it is structural |
 
 ### The plan
 
-1. **This week:** Ask the ops team for carrier/transporter records. If one trucking company causes most standard-class delays, talk to them before buying our own trucks.
-2. **Next month:** Buy 1 truck ($40K) for the Phnom Penh–Siem Reap route — our highest-volume corridor. Run a pilot for 3 months. Measure the late rate before and after.
-3. **If the pilot works:** Buy the second truck for Phnom Penh–Battambang.
-4. **Don't upgrade the warehouse** unless and until in-house delivery improves but delays persist. That would mean the bottleneck is picking/packing, not transit.
+1. **This week:** Audit 3PL contracts for the 10 worst origin cities. Implement strict SLAs with financial chargebacks for late deliveries.
+2. **Next month:** Issue an RFP to onboard a secondary carrier for the worst-performing Standard Class routes. Breaking the single-source dependency immediately creates competition and better service.
+3. **Continuous:** Adjust the system's promised delivery dates. If standard routes structurally take 4 days instead of 3, promise the customer 4 days.
+4. **Do not spend CapEx** on trucks or warehouse upgrades until vendor management levers have been exhausted.
 
 ### Estimated impact
 
@@ -129,7 +129,7 @@ We attempted to build a predictive model using order-level features (product, cu
 |----------|---------------------------|-----------------|
 | Fix worst 20% of origins to company average | ~50,000 | ~$1.7M |
 | Fix Standard Class to Second Class levels | ~14,000 | ~$462K |
-| 1 truck pilot on PNH–REP route | TBD — needs A/B test | TBD |
+| Cost avoidance (Cancel CapEx Fleet Purchase) | N/A | $40K to $80K saved immediately |
 
 ---
 

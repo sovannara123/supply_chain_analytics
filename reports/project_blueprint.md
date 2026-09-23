@@ -12,7 +12,7 @@
 | **Stakeholder** | Operations Director |
 | **Decision** | Buy 2 delivery trucks ($80K) OR upgrade warehouse racking/inventory system ($60K). Budget covers only one. |
 | **Deadline** | 3 weeks |
-| **Recommendation** | Buy the trucks. The bottleneck is on the road, not in the warehouse. |
+| **Recommendation** | Enforce SLAs and diversify carriers. Do not spend CapEx on trucks or warehouse. |
 | **Data source** | DataCo Smart Supply Chain dataset (Kaggle). 180,519 orders, 2015–2018. |
 
 ---
@@ -158,9 +158,9 @@ Reports:
 - **What-if simulation:** Shifting 25% of Standard to Second Class eliminates ~3,300 late orders.
 
 ### Step 4: Recommendation (notebook 02)
-- **Decision:** Buy 1 truck ($40K), pilot on Phnom Penh–Siem Reap route for 3 months
-- **Don't upgrade the warehouse** — evidence points to transit bottleneck, not picking/packing
-- **Next:** Get carrier/transporter records from ops team before buying — the problem might be one bad trucking company
+- **Decision:** Shift to Asset-Light Strategy. Enforce SLAs on 3PLs and cancel fleet CapEx purchase
+- **Don't upgrade the warehouse** — evidence points to 3PL transit bottleneck, not picking/packing
+- **Next:** Audit carrier records and issue RFP for secondary carriers on the worst Standard Class routes
 
 ---
 
@@ -196,12 +196,12 @@ Why are 57% of deliveries late?
 ├── Is it carrier/transport?
 │   ├── Evidence: Standard Class disproportionately worse
 │   ├── Evidence: 20% origins → 71% late orders (concentrated)
-│   └── YES → This is the bottleneck
-│       → Buy trucks (or renegotiate with worst carriers)
+│   └── YES → This is a vendor management failure
+│       → Shift to asset-light strategy (SLAs, RFPs, chargebacks)
 │
-└── Recommendation: Buy 1 truck, pilot on PNH–REP route
-    └── If pilot works → buy second truck
-    └── If delays persist after in-house trucks → THEN investigate warehouse
+└── Recommendation: Enforce SLAs and diversify carrier network
+    └── If chargebacks fail → Issue RFP for new 3PLs
+    └── Do not spend CapEx on fleet or warehouse until vendor levers are exhausted
 ```
 
 ---
@@ -212,7 +212,7 @@ Why are 57% of deliveries late?
 |-------------|----------------|------------------------------|
 | Carrier/transporter IDs | Cambodia's trucking market is fragmented (many small operators) | Which specific transport companies to drop or renegotiate with |
 | Warehouse processing timestamps | Can't measure inbound→outbound time | Whether the bottleneck is at supplier (goods leave late) or our warehouse (slow dispatch) |
-| Freight costs per delivery | Can't calculate ROI of buying trucks vs using carriers | Exact payback period for truck purchase |
+| Freight costs per delivery | Can't calculate TCO of fleet vs using carriers | Total cost avoidance by enforcing SLAs over CapEx |
 | Rainy season / weather data | Wet season (May-Oct) is a major logistics factor in Cambodia | Quantifies weather's actual impact on delays |
 | Customer retention data | Can't track which retailers churn or why | Dollar cost of late delivery in lost lifetime value |
 

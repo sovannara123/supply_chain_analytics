@@ -7,9 +7,9 @@
 
 **The problem:** We import consumer goods from Vietnam, Thailand, and China and deliver to ~800 retail partners across Cambodia. Our retailers are complaining. Some have started buying from competitors. The #1 complaint is late deliveries.
 
-Operations wants to buy 2 more delivery trucks ($80K). Warehouse wants to upgrade our racking and inventory system ($60K). We don't have budget for both. The Operations Director needs data to decide which investment cuts the late rate.
+Operations wants to buy 2 more delivery trucks ($80K). Warehouse wants to upgrade our racking and inventory system ($60K). The Operations Director needs data to decide which CapEx investment cuts the late rate—or if we can fix it without spending capital at all.
 
-I pulled 180K orders from our sales database to find out **why so many shipments arrive late, and whether we should invest in trucks or warehouse upgrades to fix it.**
+I pulled 180K orders from our sales database to find out **why so many shipments arrive late, and whether we should pursue an asset-heavy (trucks/warehouse) or asset-light (vendor management) strategy.**
 
 Executive summary for the Operations Director at [`reports/executive_summary.md`](reports/executive_summary.md).
 Full project overview at [`reports/project_overview.md`](reports/project_overview.md).
@@ -21,13 +21,13 @@ Full project overview at [`reports/project_overview.md`](reports/project_overvie
 - **Pareto: 20% of origin locations cause 71% of late orders.** The problem is concentrated, not random.
 - **The ML model could not predict late deliveries** (ROC-AUC 0.525). Static order features aren't enough — you need real-time logistics data (weather, port congestion, carrier tracking).
 - **Late vs on-time profit difference is negligible** ($33.08 vs $32.67). The cost is in customer retention, not margin.
-- **Recommendation for the Operations Director: buy the trucks, don't upgrade the warehouse.** Standard Class is disproportionately bad (60% late vs 47% for Second Class). The problem is on the road, not in the warehouse. Adding trucks targets the real bottleneck. Upgrading racking wouldn't change the late rate.
+- **Strategic Recommendation for the Operations Director: enforce carrier SLAs, do not buy a fleet or upgrade the warehouse.** Standard Class is disproportionately bad (60% late vs 47% for Second Class). The problem is isolated to vendor performance on the road. Buying trucks is unnecessary CapEx; we must shift to an asset-light strategy (SLAs, chargebacks, and route diversification).
 
 ## Notebooks
 
 Run in order:
 1. `notebooks/01_cleaning_and_exploration.ipynb` — load, clean, discover the 57% problem
-2. `notebooks/02_root_cause_analysis.ipynb` — root causes, what-if analysis, and whether to buy trucks or upgrade the warehouse
+2. `notebooks/02_root_cause_analysis.ipynb` — root causes, what-if analysis, and strategic vendor management evaluation
 
 ## Setup
 
@@ -60,7 +60,7 @@ Data is from the DataCo Smart Supply Chain dataset on Kaggle. The original CSV i
 - **No carrier/transporter IDs** — Cambodia's trucking market is fragmented (many small operators). Without carrier IDs, I can't tell which transport companies to drop or renegotiate with.
 - **First Class / Same Day delivery data is an artifact** — all 27K orders have identical shipping times (scheduled=1d, real=2d). Zero variance. A data generation issue in the Kaggle dataset. Not real delivery data.
 - **Supplier analysis uses city|country as a proxy** — not real supplier IDs. A city like "Phnom Penh" has dozens of actual suppliers. The Pareto finding (71/20) is directional, not actionable at vendor level.
-- **No freight costs** — without cost per delivery, I can't calculate ROI of buying trucks vs using third-party carriers
+- **No freight costs** — without cost per delivery, I can't precisely calculate the Total Cost of Ownership (TCO) difference between an in-house fleet and 3PL SLAs.
 - **No rainy season data** — Cambodia's wet season (May-Oct) is a major logistics factor. The dataset doesn't include weather data, so I couldn't quantify its impact on delays.
 - **No customer retention data** — I can calculate lost revenue from canceled orders ($1.57M) but not the lifetime value impact of retailers switching to competitors
 - **Data is from 2015-2018** — retrospective. Current operations may have changed.
@@ -73,7 +73,7 @@ I started this analysis assuming the late deliveries were a rainy season problem
 2. **Standard vs Second Class (notebook 02).** Same suppliers, same warehouse, same destinations — but Standard is 60% late and Second is 47% late. The warehouse doesn't know which delivery class an order uses. The difference is on the road, not inside our building.
 3. **The ML model failed (notebook 02).** I spent the most time on this and it produced the least value. The root cause analysis is where all the actionable findings are. If I'd stopped earlier, I'd have reached the same recommendation faster.
 
-The arc: rainy season → operational → transport-specific. Each step narrowed the possible fixes until buying more trucks made more sense than upgrading the warehouse.
+The arc: rainy season → operational → transport-specific. Each step narrowed the possible fixes until it became clear this was a vendor management failure, pivoting the strategy away from CapEx entirely.
 
 ## What surprised me
 

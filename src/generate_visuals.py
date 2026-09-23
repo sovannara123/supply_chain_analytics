@@ -120,30 +120,26 @@ plt.close()
 # ---------------------------------------------------------
 # Chart 4: ROI Projection
 # ---------------------------------------------------------
-scenarios = ['Fix worst 20% of origins', 'Fix Standard Class to Second Class levels', '1 truck pilot on Phnom Penh–Siem Reap']
-profit = [1700000, 462000, 0]
+scenarios = ['Fix worst 20% of origins (SLA Enforcement)', 'Carrier Diversification for Standard Class', 'Cost Avoidance: Cancel Truck Purchase']
+profit = [1700000, 462000, 40000]
 
 fig, ax = plt.subplots(figsize=(10, 4))
 # Reverse to have the highest on top
 scenarios.reverse()
 profit.reverse()
 
-colors = ['#B0B0B0' if p == 0 else '#59A14F' for p in profit]
+colors = ['#59A14F' for p in profit]
 bars = ax.barh(scenarios, profit, color=colors)
 
-ax.set_xlabel('Estimated Profit Protected ($ USD)', weight='bold')
-ax.set_title('Potential ROI by Addressing the Road Bottleneck', weight='bold', loc='left', pad=15)
+ax.set_xlabel('Estimated Financial Impact ($ USD)', weight='bold')
+ax.set_title('Potential Impact of Asset-Light Optimization Strategy', weight='bold', loc='left', pad=15)
 ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: format(int(x), ',')))
 
 for bar, p in zip(bars, profit):
     width = bar.get_width()
-    if p > 0:
-        label = f'${p/1000000:.1f}M' if p >= 1000000 else f'${p/1000:.0f}K'
-        ax.text(width + 20000, bar.get_y() + bar.get_height()/2, label, 
-                va='center', ha='left', weight='bold', color='#333333')
-    else:
-        ax.text(width + 20000, bar.get_y() + bar.get_height()/2, 'TBD (Pilot)', 
-                va='center', ha='left', weight='bold', color='#B0B0B0')
+    label = f'${p/1000000:.1f}M' if p >= 1000000 else f'${p/1000:.0f}K'
+    ax.text(width + 20000, bar.get_y() + bar.get_height()/2, label, 
+            va='center', ha='left', weight='bold', color='#333333')
 
 plt.tight_layout()
 plt.savefig(f'{output_dir}/roi_projection.png', dpi=300)
