@@ -11,6 +11,11 @@ Operations wants to buy 2 more delivery trucks ($80K). Warehouse wants to upgrad
 
 I pulled 180K orders from our sales database to find out **why so many shipments arrive late, and whether we should pursue an asset-heavy (trucks/warehouse) or asset-light (vendor management) strategy.**
 
+## 🛠 Tech Stack & Skills Demonstrated
+- **Data Engineering**: PostgreSQL (Star Schema modeling), Python (Automated Data Quality validation)
+- **Data Science**: Python, Pandas, Scikit-Learn (Random Forest, Logistic Regression), Matplotlib
+- **Analytics Framework**: Applied Gartner's Analytics Maturity Model (Diagnostic & Prescriptive Analytics)
+
 Executive summary for the Operations Director at [`reports/executive_summary.md`](reports/executive_summary.md).
 Full project overview at [`reports/project_overview.md`](reports/project_overview.md).
 
@@ -73,7 +78,7 @@ I started this analysis assuming the late deliveries were a rainy season problem
 2. **Standard vs Second Class (notebook 02).** Same suppliers, same warehouse, same destinations — but Standard is 60% late and Second is 47% late. The warehouse doesn't know which delivery class an order uses. The difference is on the road, not inside our building.
 3. **The ML model failed (notebook 02).** I spent the most time on this and it produced the least value. The root cause analysis is where all the actionable findings are. If I'd stopped earlier, I'd have reached the same recommendation faster.
 
-The arc: rainy season → operational → transport-specific. Each step narrowed the possible fixes until it became clear this was a vendor management failure, pivoting the strategy away from CapEx entirely.
+The arc: **Descriptive** (What is the late rate?) → **Diagnostic** (Why is it happening? Standard vs Second class) → **Predictive** (Can we forecast it? No, lacking telematics) → **Prescriptive** (What should we do? Enforce SLAs, avoid CapEx). Each step narrowed the possible fixes until it became clear this was a vendor management failure, pivoting the strategy away from CapEx entirely.
 
 ## What surprised me
 
@@ -103,11 +108,12 @@ The arc: rainy season → operational → transport-specific. Each step narrowed
 supply-chain-analytics/
 ├── data/               # Raw CSV (download from Kaggle)
 ├── notebooks/          # 01_cleaning, 02_root_cause
-├── sql/                # DDL, view creation, analysis queries
-├── src/                # Reusable Python modules (utils.py)
+├── sql/                # DDL, Star Schema Data Modeling, analysis queries
+├── src/                # Python modules (data_quality.py, visuals)
 ├── visuals/            # Saved charts and figures
-├── reports/            # Executive summary, project overview, audit prompt
+├── reports/            # Executive summary, project overview
+├── docs/               # Project evaluation and workflow architecture
 └── .env.example        # Database connection template (copy to .env)
 ```
 
-Notebooks load data from the `analysis_ready` PostgreSQL view (see `sql/00_create_table.sql` for the schema).
+Notebooks load data from the `analysis_ready` PostgreSQL view (see `sql/00_create_table.sql` and `sql/03_star_schema.sql` for the schema).
